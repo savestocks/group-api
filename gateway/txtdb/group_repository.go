@@ -10,6 +10,7 @@ import (
     "github.com/andersonlira/group-api/domain"
 	"github.com/andersonlira/goutils/io"
 	"github.com/andersonlira/goutils/str"
+	"sort"
 )
 
 //GetGroupList return all items 
@@ -18,6 +19,9 @@ func GetGroupList() []domain.Group {
     fileName := fmt.Sprintf("bd/%ss.json", "Group");
 	listTxt, _ := io.ReadFile(fileName)
 	json.Unmarshal([]byte(listTxt), &list)
+	sort.Slice(list, func(i, j int) bool {
+		return list[i].Name < list[j].Name
+	})
 	return list
 }
 
@@ -80,3 +84,4 @@ func writeGroup(list []domain.Group) {
 	}
 	io.WriteFile(fmt.Sprintf("bd/%ss.json", "Group"), string(b))
 }
+

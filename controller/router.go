@@ -27,7 +27,7 @@ func MapRoutes(e *echo.Echo) {
 
 	e.Use(BasicAuth)
 
-
+	g.OPTIONS("/group",getDefaultOptions)
 	g.GET("/group", GetGroupList)
 	g.GET("/group/:id", GetGroupByID)
 	g.POST("/group", SaveGroup)
@@ -37,7 +37,11 @@ func MapRoutes(e *echo.Echo) {
 	g.GET("/info", GetInfo)
 }
 
-// Process is the middleware function to enabled options
+func getDefaultOptions(e echo.Context) error {
+	return nil
+}
+
+// BasicAuth is the middleware function to enabled options
 func BasicAuth(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		if c.Request().Method == echo.OPTIONS || c.Request().Method == echo.HEAD {

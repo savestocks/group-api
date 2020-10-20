@@ -25,7 +25,7 @@ func MapRoutes(e *echo.Echo) {
 		AllowMethods: []string{echo.GET, echo.HEAD, echo.PUT, echo.POST, echo.DELETE, echo.OPTIONS},
 	}))
 
-	e.Use(BasicAuth)
+	g.Use(BasicAuth)
 
 	g.OPTIONS("/group",getDefaultOptions)
 	g.GET("/group", GetGroupList)

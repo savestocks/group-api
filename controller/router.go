@@ -37,8 +37,8 @@ func MapRoutes(e *echo.Echo) {
 	g.GET("/info", GetInfo)
 }
 
-func getDefaultOptions(e echo.Context) error {
-	return nil
+func getDefaultOptions(c echo.Context) error {
+	return c.JSON(http.StatusNoContent,nil)
 }
 
 // BasicAuth is the middleware function to enabled options
